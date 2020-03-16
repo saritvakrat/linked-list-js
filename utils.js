@@ -86,7 +86,7 @@ function getNodeByPosition(position) {
 /**
  * 
  * @param {*} position - where we want to insert the Node
- * @summary Big O complexity == n
+ * @summary Big O complexity == n or 1
  * Remove node from specified position
  */
 function removeFromPosition(position) {
@@ -118,9 +118,79 @@ function removeFromPosition(position) {
     return current.value;
 }
 
+/**
+ * @param {*} value - the value of the Node
+ * @summary Big O complexity == n
+ * Get the position of a value
+ */
+function getIndexOf(value) {
+    let current = this.head,
+        index = 0;
+
+    while(current) {
+        // go over each node in the list, of value is equal to the searched on - return index
+        if (current.value === value) {
+            return index;
+        }
+        // move the link of the current node to the next node
+        current = current.next;
+        index++
+    }
+    // if the value is not found return -1
+    return -1;
+}
+
+/**
+ * @param {*} value - the value of the Node
+ * @summary Big O complexity == n
+ * Remove the node from the list by the specified value
+ */
+function removeElmByValue(value) {
+    // removeFromPosition == removes the node by specified position
+    // getIndexOf ==  return the index by value
+    return this.removeFromPosition(this.getIndexOf(value));
+}
+
+/**
+ * @summary Big O complexity == 1
+ * check whether our linked list is empty or not
+ */
+function isEmpty() {
+    return this.length === 0;
+}
+
+/**
+ * @summary Big O complexity == 1
+ * @returns number of nodes in the linked list
+ */
+function getLength() {
+    return this.length;
+}
+
+/**
+ * @summary Big O complexity == n
+ * @output log to console each value and its index
+ */
+function print() {
+    let current = this.head,
+        index = 0;
+
+    while (current) {
+        console.log(`The node in index ${index} value is ${current.value}`)
+        current = current.next;
+        index++;
+    }
+}
+
+
 module.exports = {
     addToTheEndOfList,
     insertInPosition,
     getNodeByPosition,
-    removeFromPosition
+    removeFromPosition,
+    getIndexOf,
+    removeElmByValue,
+    isEmpty,
+    getLength,
+    print
 }
